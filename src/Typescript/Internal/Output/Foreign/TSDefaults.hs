@@ -25,9 +25,9 @@ showField :: (IsForeignType (TSIntermediate f)) => TSField f -> Text
 showField (TSField (FieldName fName) fType) = fName <> " : "
     <> (refName . toForeignType) fType
 
-showFields :: (IsForeignType (TSIntermediate f)) => [TSField f] -> Text
-showFields fields = T.intercalate "\n" $
-    fmap (\f -> "  " <> showField f) fields
+showFields :: (IsForeignType (TSIntermediate f)) => Text -> [TSField f] -> Text
+showFields term fields = T.intercalate "\n" $
+    fmap (\f -> "  " <> showField f <> term) fields
 
 defaultForeignArray :: (IsForeignType (TSIntermediate f))
     => TSCollection f -> ForeignType
@@ -56,6 +56,6 @@ mkTSInterface :: (IsForeignType (TSIntermediate f))
 mkTSInterface iName (TSRecord fields') =
     ForeignType { refName     = iName
                 , declaration = "interface " <> iName <> " { \n"
-                      <> showFields fields' <> "\n}"
+                      <> showFields ";" fields' <> "\n}"
                 }
 
