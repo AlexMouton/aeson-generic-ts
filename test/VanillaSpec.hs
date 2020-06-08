@@ -4,7 +4,7 @@ import           BasicExamples
 
 import           Data.Proxy
 import           Data.Text                                ( Text )
-
+import           Data.Maybe (fromMaybe)
 import           Test.Hspec
 
 import           Typescript.Internal.Flavors.Vanilla
@@ -38,4 +38,4 @@ spec = describe "vanilla_ts" $ do
                 `shouldBe` "type SampleUnion = number | string | boolean"
 
 printVanilla :: (TypescriptType a) => Proxy a -> Text
-printVanilla = mkTypescriptDeclaration (Proxy :: Proxy Vanilla)
+printVanilla = fromMaybe "" $ mkTypescriptDeclaration (Proxy :: Proxy Vanilla)

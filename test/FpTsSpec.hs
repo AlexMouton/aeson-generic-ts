@@ -5,6 +5,7 @@ module FpTsSpec where
 
 import           Data.Proxy
 import           Data.Text                                ( Text )
+import           Data.Maybe (fromMaybe)
 
 import           GHC.Generics
 
@@ -35,4 +36,4 @@ spec = describe "option_type" $ do
         printFpTs (Proxy :: Proxy F) `shouldBe` answer
 
 printFpTs :: (TypescriptType a) => Proxy a -> Text
-printFpTs = mkTypescriptDeclaration (Proxy :: Proxy FpTs)
+printFpTs = fromMaybe "" $ mkTypescriptDeclaration (Proxy :: Proxy FpTs)

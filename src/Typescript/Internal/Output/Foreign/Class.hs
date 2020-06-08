@@ -22,8 +22,9 @@ class IsForeignType t where
 > data Foo = Foo {sField    :: Bar}
 > data Bar = Bar {someField :: Int}
 -}
+
 data ForeignType = ForeignType { refName     :: Text
-                               , declaration :: Text
+                               , declaration :: Maybe Text
                                }
     deriving ( Generic, Show )
 
@@ -39,6 +40,3 @@ newtype TSLibrary = TSLibrary Text
 mkTypescriptOut :: (IsForeignType t) => Maybe TSLibrary -> t -> TypescriptOutput
 mkTypescriptOut mbLib foreignType =
     TypescriptOutput (toForeignType foreignType) mbLib
-
-selfRefForeign :: Text -> ForeignType
-selfRefForeign ref = ForeignType ref ref

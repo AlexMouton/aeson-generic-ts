@@ -23,7 +23,7 @@ foreignTypescript pFlavor tsType' = toForeignType $ toTSFlavor pFlavor tsType'
 
 mkTypescriptDeclaration
     :: (TypescriptType hsType, IsForeignType (TSIntermediate flavor))
-    => Proxy flavor -> Proxy hsType -> Text
+    => Proxy flavor -> Proxy hsType -> Maybe Text
 mkTypescriptDeclaration pFlavor tsType' =
     declaration $ foreignTypescript pFlavor tsType'
 
