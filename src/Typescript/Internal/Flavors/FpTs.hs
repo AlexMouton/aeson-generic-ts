@@ -16,11 +16,9 @@ instance IsForeignType (TSComposite FpTs) where
         TSRecordLike tsData -> mkTSInterface typeName tsData
 
 mkFpTSOption :: (IsForeignType (TSIntermediate f)) => TSOption f -> ForeignType
-mkFpTSOption (TSOption tsType') =
-    ForeignType
-    ("Option<" <> (refName . toForeignType $ tsType') <> ">")
+mkFpTSOption (TSOption tsType') = ForeignType
+    ( (refName . toForeignType $ tsType') <> " | null")
     Nothing
-
 
 instance OutputsTypescript (TSIntermediate FpTs) where
     toTypescriptOutput = mkTypescriptOut (Just (TSLibrary "fp-ts"))
