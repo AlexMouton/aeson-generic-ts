@@ -4,7 +4,7 @@
 module Typescript.Internal.Output.Foreign.TSDefaults where
 
 import           Data.Text
-import qualified Data.Text                                as T
+import qualified Data.Text as T
 
 import           Typescript.Internal.Intermediate.Lang
 import           Typescript.Internal.Output.Foreign.Class
@@ -16,6 +16,8 @@ instance IsForeignType (TSComposite f)
     toForeignType (TSCompositeType composite) = toForeignType composite
 
 instance IsForeignType TSPrimitive where
+    toForeignType (TSLiteralString s) = ForeignType s Nothing
+    toForeignType (TSLiteralNumber n) = ForeignType (T.pack $ show n) Nothing
     toForeignType TSString = ForeignType "string" Nothing
     toForeignType TSNumber = ForeignType "number" Nothing
     toForeignType TSBoolean = ForeignType "boolean" Nothing

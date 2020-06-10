@@ -11,7 +11,7 @@ data TSIntermediate f =
 {-
   Typescript Primitives. Have a default rep
 -}
-data TSPrimitive = TSNumber | TSString | TSBoolean | TSVoid
+data TSPrimitive = TSLiteralNumber Float | TSLiteralString Text | TSNumber | TSString | TSBoolean | TSVoid
     deriving ( Eq, Show )
 
 {-
